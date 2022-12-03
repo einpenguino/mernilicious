@@ -6,6 +6,7 @@
          - Share travel experiences
          - Crowdsource potential scenic routes
          - Post images of notable locations
+         - Follow / Friend users
        - Login
          - Persist user data
            - Searches for potential destinations routing
@@ -14,8 +15,21 @@
          - Upload Profile images
        - Results page to provide recommendation for travel routes & dates
          - Display map as primary putput
-    Case Study: rail.cc
-1.  Recipe Directory
+         - Nodal graphical representation of transit points
+       - MVP
+         - Countries available to route [SEA Region?]
+         - Forum should be fully functional
+           - Can post text / media
+           - Persisting Identities
+         - Follow / Friend people to see what blogs / routes they have travelled
+    Case Study: 
+    - rail.cc (Functional Architecture)
+    - https://japanbyjapan.com/japan-train-travel/jr_lines/ (Train Nav bar)
+    - 12go.co (Potential API Source)
+
+<empty>
+
+    2.Recipe Directory
 
 ## Pages to Implement
 1. Home Page
