@@ -30,6 +30,15 @@
 <empty>
 
     2.Recipe Directory
+     - Types of diets the user might be interested in (Vegan / Vegetarian)
+     - Types of food / Ingredients the user might be interested in
+     - Video showcasing process of cooking
+
+<empty>
+
+    3. Skincare Recommendations / Wiki
+       - Recommend Skincare Routines based on certain ailments
+       - Procedures for
 
 ## Pages to Implement
 1. Home Page
@@ -38,6 +47,20 @@
    3. Nice background
 2. Login Page
 3. Forum
+## API Architecture
+
 #### Sites for Inspiration
 1. mammothmedia.tv
 2. https://www.webdesignerdepot.com/2017/06/10-sites-doing-vertical-navigation-right/
+
+
+#### Todo List:
+- [x] Github Repo Setup
+- [x] Node + Express + Mongoose
+- [x] Brainstorm + Draft UI
+- [ ] Model Design
+- [ ] Setup Mongoose Models
+- [ ] Use Vercel for React Frontend
+#### Wishlist of technical stuff to implement
+1. Test Driven Development
+2. Implement using TypeScript
