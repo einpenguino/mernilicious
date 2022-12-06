@@ -58,8 +58,8 @@
 - [x] Github Repo Setup
 - [x] Node + Express + Mongoose
 - [x] Brainstorm + Draft UI
-- [ ] Model Design
-- [ ] Setup Mongoose Models
+- [x] Model Design
+- [x] Setup Mongoose Models
 - [ ] Use Vercel for React Frontend
 #### Wishlist of technical stuff to implement
 1. Test Driven Development
