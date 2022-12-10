@@ -14,13 +14,13 @@ const productSchema = new Schema(
             type:String, required:true
         },
         skinType:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required=true
+            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required:true
         },
         productType:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required=true
+            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required:true
         },
         skinGoal:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required=true
+            type:[{ type: Schema.Types.ObjectId, ref: 'Directory' }], required:true
         },
         description:{
             type:Stromg
