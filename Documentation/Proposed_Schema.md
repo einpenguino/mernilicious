@@ -43,6 +43,6 @@
 - Product_Procedure_PM_Treatment : String (must exist in Product_ID dir)
 - Product_Procedure_PM_Moisturiser : String (must exist in Product_ID dir)
 
-#### Skin Goal Profile
+#### Skin Goal Profile (Mapping?)
 - Skin_Goal : String (Must exist in Skin_Goal dir)
 - Active_Ingredients : List of Strings (String val must exist within Ingredients Dir)

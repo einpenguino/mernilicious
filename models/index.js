@@ -1,9 +1,17 @@
 // Import dependencies
 const mongoose = require("mongoose");
-// const Comedian = require("./comedian.js");
-// const Show = require("./show.js");
-// const PayRoll = require("./payroll");
-// const Rates = require("./rates");
+const Products = require('./products.js')
+// const Products = require('../models')
+const SkincareRegime = require('./skincareRegime')
+const SkinGoalMapping = require('./skinGoal')
+const UserCreds = require('./userCreds')
+const UserProfile = require('./userProfile')
+const DirIngredients = require('./directory/dirIngredients')
+const DirProductID = require('./directory/dirProductID')
+const DirProductType = require('./directory/dirProductType')
+const DirSkinGoal = require('./directory/dirSkinGoal')
+const DirSkinType = require('./directory/dirSkinType')
+const DirUserName = require('./directory/dirUserName')
 
 // Config
 const mongoURI = process.env.MONGO_URL;
@@ -24,3 +32,16 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 // module.exports = {
 //     Comedian, Show, PayRoll, Rates
 // }
+module.exports = {
+    Products,
+    SkincareRegime,
+    SkinGoalMapping,
+    UserCreds,
+    UserProfile,
+    DirIngredients,
+    DirProductID,
+    DirProductType,
+    DirSkinGoal,
+    DirSkinType,
+    DirUserName
+}

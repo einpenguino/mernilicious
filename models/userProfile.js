@@ -6,10 +6,10 @@ const Schema = mongoose.Schema;
 const userProfileSchema = new Schema(
     {
         userName:{type: Schema.Types.ObjectId, ref:'UserCreds', required:true, unique:true},
-        skinType:{type: Schema.Types.ObjectId, ref:'dirSkinType', required:true},
+        skinType:{type: Schema.Types.ObjectId, ref:'DirSkinType', required:true},
         skinSensitivity:{type:Boolean, required:true},
-        skinGoal:{type: Schema.Types.ObjectId, ref:'dirSkinGoal', required:true},
-        regimeID:[{type: Schema.Types.ObjectId, ref:'RegimeID', required:true}]
+        skinGoal:{type: Schema.Types.ObjectId, ref:'DirSkinGoal', required:true},
+        regimeID:[{type: Schema.Types.ObjectId, ref:'SkincareRegime', required:true}]
     }
 )
 
