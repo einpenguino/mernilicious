@@ -28,10 +28,6 @@ db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected: ", mongoURI));
 db.on("disconnected", () => console.log("mongo disconnected"));
 
-// Export models
-// module.exports = {
-//     Comedian, Show, PayRoll, Rates
-// }
 module.exports = {
     Products,
     SkincareRegime,
