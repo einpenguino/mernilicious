@@ -12,12 +12,12 @@ const httpStatus = require('http-status')
 
 class GenericCRUD {
     constructor (Scheme) {
-        this.Scheme = Scheme
+        this.scheme = Scheme
     }
     async findAll(req, res) {{
         try{
             console.log(req.query)
-            const result = await this.Scheme.find(req.query).exec();
+            const result = await this.scheme.find(req.query).exec();
             res.send(result);
         }catch(e){
             console.error(e)
@@ -26,15 +26,15 @@ class GenericCRUD {
     }}
     async create(req, res) {{
         try{
-            const result = await this.Scheme.create(req.body);
+            const result = await this.scheme.create(req.body);
             return res.json(result)
         }catch(e){
             console.error(e)
             res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
         }
     }}
-    printScheme() {
-        console.log(this.Scheme)
+    printScheme(req, res) {
+        res.send(`this.scheme`)
     }
 }
 
