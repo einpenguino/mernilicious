@@ -13,8 +13,11 @@ require('./directory-routers/dirSkinGoal-router')(app)
 // SkinType
 require('./directory-routers/dirSkinType-router')(app)
 
+// Working Models
 // Products
 require('./product-router')(app)
+// Skincare Regime
+// require('./skincareRegime-router')(app)
 
 // let p1 = new GenericCRUD(Products)
 // // app.post('/products', create);
