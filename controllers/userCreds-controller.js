@@ -1,4 +1,4 @@
-const {SkincareRegime:model} = require('../models')
+const {UserCreds:model} = require('../models')
 const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {

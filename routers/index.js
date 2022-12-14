@@ -17,7 +17,13 @@ require('./directory-routers/dirSkinType-router')(app)
 // Products
 require('./product-router')(app)
 // Skincare Regime
-// require('./skincareRegime-router')(app)
+require('./skincareRegime-router')(app)
+// Skin Goal Mapping
+require('./skinGoal-router')(app)
+// User Creds
+require('./userCreds-router')(app)
+// User Profile
+require('./userProfile-router')(app)
 
 // let p1 = new GenericCRUD(Products)
 // // app.post('/products', create);

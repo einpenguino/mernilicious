@@ -6,9 +6,9 @@ const {
     findOne, 
     updateMany, 
     deleteMany
-} = require('../controllers/skincareRegime-controller')
+} = require('../controllers/userCreds-controller')
 
-const endpointName = 'skincareregime'
+const endpointName = 'usercreds'
 module.exports = (app) => {
     app.get(`/${endpointName}`, findAll)
     app.get(`/${endpointName}/:id`, findOne)
