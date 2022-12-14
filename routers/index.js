@@ -1,34 +1,33 @@
 const express = require('express');
-const {Products} = require('../models')
 const app = express();
-const {create, findAll, deleteOne, updateOne, findOne, updateMany, deleteMany} = require('../controllers/product-controller')
-const {GenericCRUD} = require('../controllers/generic-controller-class')
 
 // Middleware
 app.use(express.json());
 
 // Endpoints
-// Products
-app.get('/products', findAll)
-app.get('/products/:id', findOne)
-app.post('/products', create)
-app.put('/products/:id', updateOne)
-app.put('/products', updateMany)
-app.delete('/products/:id', deleteOne)
-app.delete('/products', deleteMany)
+// Directory Endpoints
+// Ingredients
+require('./directory-routers/dirIngredients-router')(app)
+// SkinGoal
+require('./directory-routers/dirSkinGoal-router')(app)
+// SkinType
+require('./directory-routers/dirSkinType-router')(app)
 
-let p1 = new GenericCRUD(Products)
-// app.post('/products', create);
-app.get('/generic', 
-    // console.log('findAll')
-    // console.log(p1.findAll)
-    // p1.findAll
-    p1.printScheme
-    // (req, res) => {
-    //     res.send(`${p1.scheme}`)
-    // }
-)
-app.post('/generic', p1.create)
+// Products
+require('./product-router')(app)
+
+// let p1 = new GenericCRUD(Products)
+// // app.post('/products', create);
+// app.get('/generic', 
+//     // console.log('findAll')
+//     // console.log(p1.findAll)
+//     // p1.findAll
+//     p1.printScheme
+//     // (req, res) => {
+//     //     res.send(`${p1.scheme}`)
+//     // }
+// )
+// app.post('/generic', p1.create)
 
 app.listen(process.env.EXPRESS_PORT, () => {
     console.log(`listening to port ${process.env.EXPRESS_PORT}`)

@@ -18,7 +18,7 @@
 - Product_Type : List of Strings, used as a check to determine if additional entries are valid
 - Skin_Type : List of Strings, used as a check to determine if additional entries are valid
 - User_name : List of **Hashed** Strings, used as a check to determine if additional entries are valid
-- Product_ID : List of Strings, used as a check to determine if additional entries are valid
+- ~~Product_ID : List of Strings, used as a check to determine if additional entries are valid~~
 - Ingredients  : List of Strings, used as a check to determine if additional entries are valid
 
 #### User Creds (REad up on JWT)

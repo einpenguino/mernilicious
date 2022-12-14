@@ -1,10 +1,10 @@
-const {DirIngredients} = require('../../models')
+const {DirSkinType:model} = require('../../models')
 const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
     try{        
         console.log(req.query);
-        const result = await DirIngredients.find(req.query).exec();
+        const result = await model.find(req.query).exec();
         res.json(result);
     }catch(e){
         console.error(e);
@@ -15,7 +15,7 @@ const findAll = async (req, res) => {
 const findOne = async (req, res) => {
     try{
         const id = req.params.id;
-        const fetched = await DirIngredients.findOne({_id:id});
+        const fetched = await model.findOne({_id:id});
         res.json(fetched);
     }catch(e){
         console.error(e);
@@ -25,7 +25,7 @@ const findOne = async (req, res) => {
 
 const create = async (req, res) => {
     try{
-        const result = await DirIngredients.create(req.body);
+        const result = await model.create(req.body);
         res.json(result)
     }catch(e){
         console.error(e);
@@ -36,7 +36,7 @@ const create = async (req, res) => {
 const updateOne = async (req, res) => {
     try{
         const id = req.params.id;
-        const updated = await DirIngredients.updateOne({_id:id}, {$set:req.body});
+        const updated = await model.updateOne({_id:id}, {$set:req.body});
         res.json(updated);
     }catch(e){
         console.error(e);
@@ -46,7 +46,7 @@ const updateOne = async (req, res) => {
 
 const updateMany = async (req, res) => {
     try{
-        const result = await DirIngredients.updateMany(req.query, {$set:req.body})
+        const result = await model.updateMany(req.query, {$set:req.body})
         res.json(result)
         // console.log(req.query)
     }catch(e){
@@ -58,7 +58,7 @@ const updateMany = async (req, res) => {
 const deleteOne = async (req, res) => {
     try{
         const id = req.params.id;
-        const result = await DirIngredients.deleteOne({_id:id});
+        const result = await model.deleteOne({_id:id});
         res.json(result);
     }catch(e){
         console.error(e);
@@ -68,7 +68,7 @@ const deleteOne = async (req, res) => {
 
 const deleteMany = async (req, res) => {
     try {
-        const result = await DirIngredients.deleteMany(req.body)
+        const result = await model.deleteMany(req.body)
         res.json(result)
     }catch(e){
         console.error(e)
