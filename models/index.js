@@ -15,6 +15,7 @@ const DirUserName = require('./directory/dirUserName')
 
 // Config
 const mongoURI = process.env.MONGO_URL;
+// const mongoURI = 'mongodb://127.0.0.1:27017/mern';
 const db = mongoose.connection;
 
 // Connect

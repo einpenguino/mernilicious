@@ -1,60 +1,136 @@
-const {Rates, Show, Comedian} = require("./models");
+require("dotenv").config();
+// const {dirActiveIngredientsSeed} = require('./dirActiveIngredientsSeed')
+// import { dirActiveIngredientsSeed } from "./dirActiveIngredientsSeed";
+const {
+    Products,
+    SkincareRegime,
+    SkinGoalMapping,
+    UserCreds,
+    UserProfile,
+    DirIngredients,
+    DirProductID,
+    DirProductType,
+    DirSkinGoal,
+    DirSkinType,
+    DirUserName
+} = require('./models')
 
-const shows = [
+const dirSkinTypeSeed = [
     {
-        title:"Weekday Smile",
-        venue:"Esplanade Theatre 1",
-        start:"2022-12-15T12:00:00Z", // Thu, 8pm
-        duration:60
+        skinType:'dry'
     },
     {
-        title:"Friday Craze",
-        venue:"Esplanade Theatre 1",
-        start:"2022-12-16T12:00:00Z", // Thu, 8pm
-        duration:90
+        skinType:'oily'
     },
     {
-        title:"Saturday Hype",
-        venue:"Esplanade Theatre 1",
-        start:"2022-12-17T12:00:00Z", // Thu, 8pm
-        duration:90
-    },
-]
-
-const comedians = [
-    {
-        name:"Uncle Roger",
-        location:"London"
+        skinType:'combination'
     },
     {
-        name:"Ra Ra Kumar",
-        location:"Singapore"
+        skinType:'normal'
     }
 ]
 
-const performSeed = async () => {
-    const createdShows = await Show.insertMany(shows);
-    console.log(`Created ${createdShows.length} shows`);
+const dirProductTypeSeed = [
+    {
+        productType:'cleanser'
+    },
+    {
+        productType:'treatment'
+    },
+    {
+        productType:'moisturiser'
+    },
+    {
+        productType:'sunscreen'
+    }
+]
 
-    createdShows.forEach(show => {
-        const rate = new Rates();
-        const dayOfWeek = new Date(show.start).getDay();
+const dirSkinGoalSeed = [
+    {
+        skinGoal:'reduce breakout'
+    },
+    {
+        skinGoal:'target hyper-pigmentation'
+    },
+    {
+        skinGoal:'brighten'
+    },
+    {
+        skinGoal:'minimise pores'
+    },
+    {
+        skinGoal:'hydrate'
+    },
+    {
+        skinGoal:'anti-aging'
+    }
+]
 
-        // $1000 for weekend. $500 for weekday.
-        rate.perHourRates = (dayOfWeek === 6 || dayOfWeek === 0) ? 1000 : 500;
+const dirActiveIngredientsSeed = [
+    {'ingredients': 'benzoyl peroxide'},
+    {'ingredients': 'retinol'},
+    {'ingredients': 'bakuchiol'},
+    {'ingredients': 'adapalene'},
+    {'ingredients': 'salicylic acid(bha)'},
+    {'ingredients': 'azelaic acid'},
+    {'ingredients': 'alpha hydroxy acids-lactic acid'},
+    {'ingredients': 'glycolic acid(aha)'},
+    {'ingredients': 'tea tree oil'},
+    {'ingredients': 'centella asiatica'},
+    {'ingredients': 'vitamin c'},
+    {'ingredients': 'kojic acid'},
+    {'ingredients': 'retinol'},
+    {'ingredients': 'tranexamic acid'},
+    {'ingredients': 'niacinamide'},
+    {'ingredients': 'mandelic acid'},
+    {'ingredients': 'arbutin'},
+    {'ingredients': 'alpha-arbutin'},
+    {'ingredients': 'licorice root extract'},
+    {'ingredients': 'hyaluronnic acid'},
+    {'ingredients': 'glycerin'},
+    {'ingredients': 'ceramides'},
+    {'ingredients': 'squalane'},
+    {'ingredients': 'lactic acid'},
+    {'ingredients': 'sodium hyaluronate'},
+    {'ingredients': 'amino acids'},
+    {'ingredients': 'snail mucin'},
+    {'ingredients': 'glycolic acid(aha)'},
+    {'ingredients': 'peptides'},
+    {'ingredients': 'grape seed extract'},
+    {'ingredients': 'green tea extract'},
+    {'ingredients': 'coenzyme q10'},
+    {'ingredients': 'resveratrol'}]
     
-        rate.show = show._id;
-        rate.save();
-        console.log("Created rates: ", JSON.stringify(rate));
-    });
-
-    const createdComedians = await Comedian.insertMany(comedians);
-    console.log(`Created ${createdComedians.length} comedians`);
+const performSeed = async () => {
+    try{
+        const createdSkinTypes = await DirSkinType.insertMany(dirSkinTypeSeed)
+        console.log(`created ${dirSkinTypeSeed.length} Skin type directory entries!`)
+    }catch(e){
+        console.log(e)
+    }
+    try{
+        const createdProductTypes = await DirProductType.insertMany(dirProductTypeSeed)
+        console.log(`created ${dirProductTypeSeed.length} Product type directory entries!`)
+    }catch(e){
+        console.log(e)
+    }
+    try{
+        const createdSkinGoals = await DirSkinGoal.insertMany(dirSkinGoalSeed)
+        console.log(`created ${dirSkinGoalSeed.length} Skin Goals directory entries!`)
+    }catch(e){
+        console.log(e)
+    }
+    try{
+        const createdActiveIngredients = await DirIngredients.insertMany(dirActiveIngredientsSeed)
+        console.log(`created ${dirActiveIngredientsSeed.length} Active Ingredients directory entries!`)
+    }catch(e){
+        console.log(e)
+    }
 }
 
-performSeed();
+performSeed()
 
 setInterval(()=>{
-    console.log("Countdown 2s and exit...");
-    process.exit(0);
-}, 2000)
+        console.log("Countdown 2s and exit...");
+        process.exit(0);
+    }, 2000)
