@@ -101,8 +101,6 @@ const dirActiveIngredientsSeed = [
     {'ingredients': 'coenzyme q10'},
     {'ingredients': 'resveratrol'}]
 
-const 
-    
 const performSeed = async () => {
     try{
         const createdSkinTypes = await DirSkinType.insertMany(dirSkinTypeSeed)

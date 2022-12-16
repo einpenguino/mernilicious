@@ -25,12 +25,44 @@ const findOne = async (req, res) => {
 
 const create = async (req, res) => {
     try{
-        console.log(req.body)
-        const result = await Products.create(req.body);
-        res.json(result)
+        const resSkinType = req.body.skinType
+        for (ele of resSkinType){
+            const querySkinType = await DirSkinType.find({skinType:ele})
+            if (querySkinType.length < 1) {
+                res.send(`Error! "${ele}" does not exist! in SkinType Directory!`)
+            }
+        }
+
+        const resProductType = req.body.productType
+        for (ele of resProductType){
+            const queryProductType = await DirProductType.find({productType:ele})
+            if (queryProductType.length < 1) {
+                res.send(`Error! "${ele}" does not exist! in ProductType Directory!`)
+            }
+        }
+
+        const resSkinGoal = req.body.skinGoal
+        for (ele of resSkinGoal){
+            const querySkinGoal = await DirSkinGoal.find({SkinGoal:ele})
+            if (querySkinGoal.length < 1) {
+                res.send(`Error! "${ele}" does not exist! in SkinGoal Directory!`)
+            }
+        }
+        
+        const resIngredients = req.body.ingredients
+        for (ele of resIngredients){
+            const queryIngredients = await DirIngredients.find({ingredients:ele})
+            if (queryIngredients.length < 1) {
+                res.send(`Error! "${ele}" does not exist! in Ingredients Directory!`)
+            }
+        }
+        
+        await Products.create(req.body)
+
+        res.send('completed successfully!')
     }catch(e){
-        console.error(e);
-        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+        console.log(e)
+        res.send(e)
     }
 }
 

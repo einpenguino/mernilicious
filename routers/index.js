@@ -1,4 +1,6 @@
 const express = require('express');
+const {DirSkinType, DirProductType, DirIngredients, DirSkinGoal, Products} = require('../models')
+const {checkExists} = require('../services/checkExists')
 const app = express();
 
 // Middleware
@@ -27,18 +29,9 @@ require('./userCreds-router')(app)
 // User Profile
 require('./userProfile-router')(app)
 
-// let p1 = new GenericCRUD(Products)
-// // app.post('/products', create);
-// app.get('/generic', 
-//     // console.log('findAll')
-//     // console.log(p1.findAll)
-//     // p1.findAll
-//     p1.printScheme
-//     // (req, res) => {
-//     //     res.send(`${p1.scheme}`)
-//     // }
-// )
-// app.post('/generic', p1.create)
+app.post('/trial', async (req, res) => {
+    
+})
 
 app.listen(process.env.EXPRESS_PORT, () => {
     console.log(`listening to port ${process.env.EXPRESS_PORT}`)

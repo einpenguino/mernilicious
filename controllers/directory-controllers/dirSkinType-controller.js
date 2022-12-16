@@ -3,8 +3,8 @@ const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
     try{        
-        console.log(req.query);
-        const result = await model.find(req.query).exec();
+        console.log(req.body);
+        const result = await model.find(req.body).exec();
         res.json(result);
     }catch(e){
         console.error(e);

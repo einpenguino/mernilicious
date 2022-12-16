@@ -7,7 +7,7 @@ const SkinGoalMapping = require('./skinGoal')
 const UserCreds = require('./userCreds')
 const UserProfile = require('./userProfile')
 const DirIngredients = require('./directory/dirIngredients')
-const DirProductID = require('./directory/dirProductID')
+// const DirProductID = require('./directory/dirProductID')
 const DirProductType = require('./directory/dirProductType')
 const DirSkinGoal = require('./directory/dirSkinGoal')
 const DirSkinType = require('./directory/dirSkinType')
@@ -36,7 +36,7 @@ module.exports = {
     UserCreds,
     UserProfile,
     DirIngredients,
-    DirProductID,
+    // DirProductID,
     DirProductType,
     DirSkinGoal,
     DirSkinType,

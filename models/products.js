@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
     {
-        productID:{
-            type:String, required:true, unique:true
-        },
+        // productID:{
+        //     type:String, required:true, unique:true
+        // },
         name:{
             type:String, required:true
         },
@@ -15,13 +15,13 @@ const productSchema = new Schema(
         },
         
         skinType:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'DirSkinType' }], required:true
+            type:[{ type: String}], required:true
         },
         productType:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'DirProductType' }], required:true
+            type:[{ type: String}], required:true
         },
         skinGoal:{
-            type:[{ type: Schema.Types.ObjectId, ref: 'DirSkinGoal' }], required:true
+            type:[{ type: String}], required:true
         },
         description:{
             type:String
