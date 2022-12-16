@@ -100,6 +100,8 @@ const dirActiveIngredientsSeed = [
     {'ingredients': 'green tea extract'},
     {'ingredients': 'coenzyme q10'},
     {'ingredients': 'resveratrol'}]
+
+const 
     
 const performSeed = async () => {
     try{
