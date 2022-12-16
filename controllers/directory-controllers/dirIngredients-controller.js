@@ -4,7 +4,7 @@ const httpStatus = require('http-status')
 const findAll = async (req, res) => {
     try{        
         console.log(req.body);
-        const result = await DirIngredients.find(req.body).exec();
+        const result = await DirIngredients.find(req.body);
         res.json(result);
     }catch(e){
         console.error(e);

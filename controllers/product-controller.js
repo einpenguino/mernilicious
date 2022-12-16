@@ -3,8 +3,8 @@ const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
     try{        
-        console.log(req.query);
-        const result = await Products.find(req.query).exec();
+        console.log(req.body);
+        const result = await Products.find(req.body);
         res.json(result);
     }catch(e){
         console.error(e);
@@ -42,8 +42,10 @@ const create = async (req, res) => {
         }
 
         const resSkinGoal = req.body.skinGoal
+        console.log(resSkinGoal)
         for (ele of resSkinGoal){
-            const querySkinGoal = await DirSkinGoal.find({SkinGoal:ele})
+            const querySkinGoal = await DirSkinGoal.find({skinGoal:ele})
+            console.log(querySkinGoal)
             if (querySkinGoal.length < 1) {
                 res.send(`Error! "${ele}" does not exist! in SkinGoal Directory!`)
             }

@@ -4,7 +4,7 @@ const httpStatus = require('http-status')
 const findAll = async (req, res) => {
     try{        
         console.log(req.body);
-        const result = await model.find(req.body).exec();
+        const result = await model.find(req.body);
         res.json(result);
     }catch(e){
         console.error(e);
@@ -48,7 +48,6 @@ const updateMany = async (req, res) => {
     try{
         const result = await model.updateMany(req.query, {$set:req.body})
         res.json(result)
-        // console.log(req.query)
     }catch(e){
         console.error(e);
         res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
