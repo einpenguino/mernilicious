@@ -12,6 +12,8 @@ require('./directory-routers/dirIngredients-router')(app)
 require('./directory-routers/dirSkinGoal-router')(app)
 // SkinType
 require('./directory-routers/dirSkinType-router')(app)
+// Product Type
+require('./directory-routers/dirProductType-router')(app)
 
 // Working Models
 // Products

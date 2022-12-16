@@ -1,4 +1,4 @@
-const {Products} = require('../models')
+const {Products, DirIngredients, DirProductType, DirSkinType, DirSkinGoal} = require('../models')
 const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
@@ -25,6 +25,7 @@ const findOne = async (req, res) => {
 
 const create = async (req, res) => {
     try{
+        console.log(req.body)
         const result = await Products.create(req.body);
         res.json(result)
     }catch(e){
