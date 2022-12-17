@@ -1,4 +1,5 @@
 require("dotenv").config();
+require('./models')
 const dirActiveIngredientsSeed = require('./seedData/dirActiveIngredientsSeed')
 const {
     Products,
@@ -13,6 +14,7 @@ const {
     DirSkinType,
     DirUserName
 } = require('./models')
+const seedProducts = require('./seedData/seedProducts')
 
 const dirSkinTypeSeed = [
     {
@@ -90,9 +92,15 @@ const performSeed = async () => {
     }catch(e){
         console.log(e)
     }
+    try{
+
+    }catch(e){
+
+    }
 }
 
-performSeed()
+// performSeed()
+console.log(seedProducts)
 
 setInterval(()=>{
         console.log("Countdown 2s and exit...");

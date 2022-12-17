@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
     {
-        // productID:{
-        //     type:String, required:true, unique:true
-        // },
+        productID:{
+            type:String, required:true, unique:true
+        },
         name:{
             type:String, required:true
         },
@@ -21,7 +21,7 @@ const productSchema = new Schema(
             type:[{ type: String}], required:true
         },
         skinGoal:{
-            type:[{ type: String}], required:true
+            type:[{ type: String}]
         },
         description:{
             type:String
@@ -29,6 +29,9 @@ const productSchema = new Schema(
         ingredients:{
             type:[{ type:String }]
         },
+        sensitive:{
+            type:Boolean, required:true
+        }
         // activeIngredients:{
         //     type:[{ type:String }], required:true
         // }
