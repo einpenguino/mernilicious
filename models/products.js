@@ -11,7 +11,7 @@ const productSchema = new Schema(
             type:String, required:true
         },
         price:{
-            type:Schema.Types.Decimal128, required:true
+            type:Schema.Types.Decimal128
         },
         
         skinType:{

@@ -15,6 +15,7 @@ const {
     DirUserName
 } = require('./models')
 const seedProducts = require('./seedData/seedProducts')
+const {create:ProductCreate} = require('./controllers/product-controller')
 
 const dirSkinTypeSeed = [
     {
@@ -28,6 +29,9 @@ const dirSkinTypeSeed = [
     },
     {
         skinType:'normal'
+    },
+    {
+        skinType:'all'
     }
 ]
 
@@ -93,14 +97,16 @@ const performSeed = async () => {
         console.log(e)
     }
     try{
-
+        // await ProductCreate(seedProducts)
+        await Products.insertMany(seedProducts)
+        console.log(`created ${seedProducts.length} Products directory entries!`)
     }catch(e){
-
+        console.log(e)
     }
 }
 
-// performSeed()
-console.log(seedProducts)
+performSeed()
+// console.log(seedProducts)
 
 setInterval(()=>{
         console.log("Countdown 2s and exit...");
