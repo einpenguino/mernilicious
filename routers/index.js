@@ -1,6 +1,7 @@
 const express = require('express');
 const {DirSkinType, DirProductType, DirIngredients, DirSkinGoal, Products} = require('../models')
 const {checkExists} = require('../services/checkExists')
+const userRoutes = require('./userCreds-router')
 const app = express();
 const Products1 = require('../controllers/TrialCRUD')
 
@@ -26,15 +27,16 @@ require('./skincareRegime-router')(app)
 // Skin Goal Mapping
 require('./skinGoal-router')(app)
 // User Creds
-require('./userCreds-router')(app)
+// require('./userCreds-router')(app)
+app.use('/user', userRoutes)
 // User Profile
 require('./userProfile-router')(app)
 
-app.post('/trial', async (req, res) => {
-    // console.log()
-    Products1.findAll(req, res)
-    // res.send('completed')
-})
+// app.post('/trial', async (req, res) => {
+//     // console.log()
+//     Products1.findAll(req, res)
+//     // res.send('completed')
+// })
 
 app.listen(process.env.EXPRESS_PORT, () => {
     console.log(`listening to port ${process.env.EXPRESS_PORT}`)

@@ -19,7 +19,6 @@ const clearAllData = async () => {
     await UserCreds.deleteMany({});
     await UserProfile.deleteMany({});
     await DirIngredients.deleteMany({});
-    // await DirProductID.deleteMany({});
     await DirProductType.deleteMany({});
     await DirSkinGoal.deleteMany({});
     await DirSkinType.deleteMany({});

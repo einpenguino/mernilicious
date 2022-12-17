@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "cleardb":"node clearDb.js",
+    "cleardb": "node clearDb.js",
     "seed": "node seed.js",
     "dev": "nodemon app.js"
   },
@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
     "http-status": "^1.5.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.5"

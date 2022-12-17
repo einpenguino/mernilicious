@@ -14,14 +14,13 @@ const DirSkinType = require('./directory/dirSkinType')
 const DirUserName = require('./directory/dirUserName')
 
 // Config
-const mongoURI = process.env.MONGO_URL;
-// const mongoURI = 'mongodb://127.0.0.1:27017/mern';
+// const mongoURI = process.env.MONGO_CLOUD_URL;
+const mongoURI = 'mongodb://127.0.0.1:27017/mern';
 const db = mongoose.connection;
 
 // Connect
 mongoose.connect(mongoURI, ()=>{
     console.log("Connection to Mongo DB established.");
-    
 });
 
 // Helpful events

@@ -11,7 +11,7 @@ const productSchema = new Schema(
             type:String, required:true
         },
         price:{
-            type:Schema.Types.Decimal128
+            type:Schema.Types.Decimal128, default:0.0
         },
         
         skinType:{
@@ -30,11 +30,8 @@ const productSchema = new Schema(
             type:[{ type:String }]
         },
         sensitive:{
-            type:Boolean, required:true
+            type:Boolean, required:true, default:false
         }
-        // activeIngredients:{
-        //     type:[{ type:String }], required:true
-        // }
     }
 )
 
