@@ -33,4 +33,4 @@ const dirActiveIngredientsSeed = [
     {'ingredients': 'coenzyme q10'},
     {'ingredients': 'resveratrol'}]
 
-export {dirActiveIngredientsSeed}
+module.exports = dirActiveIngredientsSeed

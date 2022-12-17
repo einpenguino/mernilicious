@@ -1,4 +1,5 @@
 const {Products, DirIngredients, DirProductType, DirSkinType, DirSkinGoal} = require('../models')
+const checkExists = require('../services/checkExists')
 const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
@@ -42,10 +43,8 @@ const create = async (req, res) => {
         }
 
         const resSkinGoal = req.body.skinGoal
-        console.log(resSkinGoal)
         for (ele of resSkinGoal){
             const querySkinGoal = await DirSkinGoal.find({skinGoal:ele})
-            console.log(querySkinGoal)
             if (querySkinGoal.length < 1) {
                 res.send(`Error! "${ele}" does not exist! in SkinGoal Directory!`)
             }
@@ -60,7 +59,6 @@ const create = async (req, res) => {
         }
         
         await Products.create(req.body)
-
         res.send('completed successfully!')
     }catch(e){
         console.log(e)

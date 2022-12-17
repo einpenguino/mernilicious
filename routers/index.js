@@ -2,6 +2,7 @@ const express = require('express');
 const {DirSkinType, DirProductType, DirIngredients, DirSkinGoal, Products} = require('../models')
 const {checkExists} = require('../services/checkExists')
 const app = express();
+const Products1 = require('../controllers/TrialCRUD')
 
 // Middleware
 app.use(express.json());
@@ -30,7 +31,9 @@ require('./userCreds-router')(app)
 require('./userProfile-router')(app)
 
 app.post('/trial', async (req, res) => {
-    
+    // console.log()
+    Products1.findAll(req, res)
+    // res.send('completed')
 })
 
 app.listen(process.env.EXPRESS_PORT, () => {
