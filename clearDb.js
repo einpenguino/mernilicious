@@ -23,6 +23,7 @@ const clearAllData = async () => {
     await DirSkinGoal.deleteMany({});
     await DirSkinType.deleteMany({});
     await DirUserName.deleteMany({});
+    await UserCreds.deleteMany({});
 }
 
 clearAllData();

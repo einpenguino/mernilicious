@@ -4,6 +4,7 @@ const {checkExists} = require('../services/checkExists')
 const userRoutes = require('./userCreds-router')
 const app = express();
 const Products1 = require('../controllers/TrialCRUD')
+const {deleteMany:DeletUsers, findAll:FindUsers} = require('../controllers/userCreds-controller')
 
 // Middleware
 app.use(express.json());
@@ -29,6 +30,8 @@ require('./skinGoal-router')(app)
 // User Creds
 // require('./userCreds-router')(app)
 app.use('/user', userRoutes)
+app.get('/users', FindUsers)
+app.delete('/users', DeletUsers)
 // User Profile
 require('./userProfile-router')(app)
 

@@ -7,21 +7,21 @@ const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search
       ? {
           $or: [
-            { name: { $regex: req.query.search, $options: "i" } },
+            { userName: { $regex: req.query.search, $options: "i" } },
             { email: { $regex: req.query.search, $options: "i" } },
           ],
         }
       : {};
   
-    // const users = await model.find(keyword).find({ _id: { $ne: req.user._id } });
-    const users = await model.find(keyword)
+    const users = await model.find(keyword).find({ _id: { $ne: req.user._id } });
+    // const users = await model.find(keyword)
     res.send(users);
   });
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, pic } = req.body;
+    const { userName, email, password, pic } = req.body;
   
-    if (!name || !email || !password) {
+    if (!userName || !email || !password) {
       res.status(400);
       throw new Error("Please fill in all fields!");
     }
@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   
     const user = await model.create({
-      name,
+        userName,
       email,
       password,
       pic,
@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user) {
       res.status(201).json({
         _id: user._id,
-        name: user.name,
+        userName: user.userName,
         email: user.email,
         isAdmin: user.isAdmin,
         pic: user.pic,
@@ -51,7 +51,7 @@ const registerUser = asyncHandler(async (req, res) => {
       });
     } else {
       res.status(400);
-      throw new Error("User not found");
+      throw new Error("Failed to create User!");
     }
   });
 
@@ -63,7 +63,7 @@ const authUser = asyncHandler(async (req, res) => {
     if (user && (await user.matchPassword(password))) {
         res.json({
         _id: user._id,
-        name: user.name,
+        userName: user.userName,
         email: user.email,
         isAdmin: user.isAdmin,
         pic: user.pic,
@@ -76,9 +76,17 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const findAll = async (req, res) => {
-    try{        
-        console.log(req.query);
-        const result = await model.find(req.query).exec();
+    try{
+        const keyword = req.query.search
+        ? {
+            $or: [
+              { name: { $regex: req.query.search, $options: "i" } },
+              { email: { $regex: req.query.search, $options: "i" } },
+            ],
+          }
+        : {};
+        console.log(keyword);
+        const result = await model.find(req.query);
         res.json(result);
     }catch(e){
         console.error(e);

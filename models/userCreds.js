@@ -5,10 +5,11 @@ const Schema = mongoose.Schema;
 
 const userCredentialsSchema = new Schema(
     {
-        name:{type:String, required:true, unique:true},
+        userName:{type:String, required:true, unique:true},
         email:{type:String, required:true, unique:true},
         password:{type:String, required:true},
-        pic:{type:String},
+        pic:{type:String,
+        default:'https://cdn-icons-png.flaticon.com/512/149/149071.png'},
         isAdmin:{type:Boolean, required:true, default:false}
     },
     {timestamps:true}
