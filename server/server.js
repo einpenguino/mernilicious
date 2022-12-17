@@ -1,10 +1,14 @@
 require('dotenv').config();
+const httpStatus = require("http-status");
+const bcrypt = require('bcrypt');
 const express = require("express");
 const cors = require ("cors");
+const jwt = require ("jsonwebtoken");
+
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
 
-//Importing the Product.js models
+//Importing the models
 const Products = require('./models/Product');
 
 const UserCreds = require('./models/UserCred');
@@ -20,11 +24,12 @@ app.use(express.json());
 
 
 
+
 //Create a GET route, for getting all the product
-app.get("/", async(req, res) => {
+app.get("/prod", async(req, res) => {
     try{
-        const posts = await Products.find();
-        res.json(posts);
+        const prods = await Products.find();
+        res.json(prods);
     }
     catch(err){
         res.json({message:err})
@@ -34,7 +39,7 @@ app.get("/", async(req, res) => {
 //Create a POST route, that create/upload new product into the DB
 app.post("/", async (req,res) => {
    
-    const post = new Products({
+    const prod = new Products({
         Product_ID: req.body.p_id,
         Name: req.body.name,
         Price: req.body.price,
@@ -48,8 +53,8 @@ app.post("/", async (req,res) => {
     });
 
     try{
-    const savedPost = await post.save();
-    res.json(savedPost);
+    const savedProd = await prod.save();
+    res.json(savedProd);
     }
     catch(err){
         res.json({message:err})
@@ -60,25 +65,59 @@ app.post("/", async (req,res) => {
 });
 
 
+
+
 //Create a POST route, that creates new user (signup) and stored into the DB
 app.post("/userCred", async (req,res) => {
-   
+
+   const hash = await bcrypt.hash(req.body.password, 10)
     const user = new UserCreds({
+        Name: req.body.name,
         Username: req.body.username,
-        Password: req.body.password
+        Password: hash
     });
 
     try{
     const savedUser = await user.save();
     res.json(savedUser);
     }
-    catch(err){
-        res.json({message:err})
-    }
-    console.log('I got a request')
-    console.log(req.body)
-    
+    catch(error){
+        res.status(400).send(error.message); 
+        console.log(error.message);     
+    }  
 });
+
+
+//Create a POST route, that validates user login from the DB
+app.post("/login", async (req,res) => {  
+ 
+    try{ 
+        //Check if user exist in the DB thru the username
+        const checkUser = await UserCreds.findOne({Username: req.body.username});
+        if (checkUser){
+            const checkPassword = await bcrypt.compare(req.body.password, checkUser.Password)
+            if (checkPassword){
+
+                // When both username and password matches , create a token and assign to the log in user
+                const token = jwt.sign({_id: checkUser._id}, process.env.TOKEN_SECRET);
+                res.header('auth-token').json(token)
+            }
+            else{
+                res.status(400).json('Password incorrect , try again')
+            }
+        }
+        else{
+            res.status(400).json('Email incorrect or does not exsit, pls sign up')
+        }
+
+    
+    }
+    catch(error){
+        res.status(400).send(error.message); 
+        console.log(error.message);     
+    }  
+});
+
 
 
 

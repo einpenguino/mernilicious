@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+
 const Schema = mongoose.Schema;
 
 
 const userCredSchema = new Schema(
     {
+        Name:{
+            type:String, required:true,
+        },
+
         Username:{
-            type:String, required:true, unique:true
+            type:String, required:true, unique:true, lowercase: true
         },
 
         Password:{
@@ -18,6 +22,8 @@ const userCredSchema = new Schema(
 )
 
 const UserCreds = mongoose.model("UserCreds", userCredSchema);
+
+
 
 module.exports = UserCreds;
 
