@@ -14,8 +14,9 @@ const DirSkinType = require('./directory/dirSkinType')
 const DirUserName = require('./directory/dirUserName')
 
 // Config
-const mongoURI = process.env.MONGO_CLOUD_URL;
+// const mongoURI = process.env.MONGO_CLOUD_URL;
 // const mongoURI = 'mongodb://127.0.0.1:27017/mern';
+const mongoURI = `mongodb+srv://${process.env.MONGO_CLOUD_USER}:${process.env.MONGO_CLOUD_PW}@${process.env.MONGO_CLOUD_CLUSTER}`
 const db = mongoose.connection;
 
 // Connect
