@@ -1,4 +1,4 @@
 require("dotenv").config();
-// require("./routers");
+require("./routers");
 require("./models");
 

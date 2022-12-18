@@ -18,7 +18,7 @@
 - Product_Type : List of Strings, used as a check to determine if additional entries are valid
 - Skin_Type : List of Strings, used as a check to determine if additional entries are valid
 - User_name : List of **Hashed** Strings, used as a check to determine if additional entries are valid
-- Product_ID : List of Strings, used as a check to determine if additional entries are valid
+- ~~Product_ID : List of Strings, used as a check to determine if additional entries are valid~~
 - Ingredients  : List of Strings, used as a check to determine if additional entries are valid
 
 #### User Creds (REad up on JWT)
@@ -43,6 +43,6 @@
 - Product_Procedure_PM_Treatment : String (must exist in Product_ID dir)
 - Product_Procedure_PM_Moisturiser : String (must exist in Product_ID dir)
 
-#### Skin Goal Profile
+#### Skin Goal Profile (Mapping?)
 - Skin_Goal : String (Must exist in Skin_Goal dir)
 - Active_Ingredients : List of Strings (String val must exist within Ingredients Dir)
