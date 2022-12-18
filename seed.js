@@ -15,7 +15,9 @@ const {
     DirUserName
 } = require('./models')
 const seedProducts = require('./seedData/seedProducts')
-const {create:ProductCreate} = require('./controllers/product-controller')
+// const {registerUser} = require('./controllers/userCreds-controller')
+const seedUsers = require('./seedData/users')
+
 
 const dirSkinTypeSeed = [
     {
@@ -100,6 +102,13 @@ const performSeed = async () => {
         // await ProductCreate(seedProducts)
         await Products.insertMany(seedProducts)
         console.log(`created ${seedProducts.length} Products directory entries!`)
+    }catch(e){
+        console.log(e)
+    }
+    try{
+        // await ProductCreate(seedProducts)
+        await UserCreds.create(seedUsers)
+        console.log(`created ${seedUsers.length} Products directory entries!`)
     }catch(e){
         console.log(e)
     }

@@ -4,10 +4,19 @@ const {checkExists} = require('../services/checkExists')
 const userRoutes = require('./userCreds-router')
 const app = express();
 const Products1 = require('../controllers/TrialCRUD')
-const {deleteMany:DeletUsers, findAll:FindUsers} = require('../controllers/userCreds-controller')
+const {deleteMany:DeletUsers, findAll:FindUsers, login} = require('../controllers/userCreds-controller')
+let cors = require("cors");
+const cookieParser = require('cookie-parser')
+
+const corsConfig = {
+    credentials: true,
+    origin: true,
+};
 
 // Middleware
 app.use(express.json());
+app.use(cors(corsConfig));
+app.use(cookieParser())
 
 app.use(express.static("public"))
 // Endpoints
@@ -33,6 +42,7 @@ require('./skinGoal-router')(app)
 app.use('/user', userRoutes)
 app.get('/users', FindUsers)
 app.delete('/users', DeletUsers)
+app.post("/login", login);
 // User Profile
 require('./userProfile-router')(app)
 

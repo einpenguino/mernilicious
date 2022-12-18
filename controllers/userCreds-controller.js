@@ -2,6 +2,41 @@ const {UserCreds:model} = require('../models')
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../services/generateToken");
 const httpStatus = require('http-status')
+const cookieParser = require('cookie-parser')
+const jwt = require ("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
+const login = asyncHandler(async (req,res) => {  
+    const {userName, password} = req.body
+    console.log(req.body)
+    try{ 
+        //Check if user exist in the DB thru the username
+        const checkUser = await model.findOne({"userName" : req.body.userName});
+        console.log(checkUser)
+        
+        if (checkUser){
+            const checkPassword = await bcrypt.compare(req.body.password, checkUser.password)
+            if (checkPassword){
+                // When both username and password matches , create a token and assign to the log in user
+                const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
+                res.cookie('jwt',token, {httpOnly: true , maxAge:60000});
+                res.json(checkUser._id)
+            }
+            else{
+                throw 'Password incorrect , try again'
+            }
+        }
+
+        else{
+            throw 'Username incorrect or does not exist, please sign up'
+        }
+    }
+    catch(error){
+        res.status(400).json(error); 
+        console.log(error);     
+    }  
+    
+});
 
 const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search
@@ -56,9 +91,9 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
 const authUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+    const { userName, password } = req.body;
 
-    const user = await model.findOne({ email });
+    const user = await model.findOne({ userName });
 
     if (user && (await user.matchPassword(password))) {
         res.json({
@@ -71,7 +106,7 @@ const authUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(401);
-        throw new Error("Invalid Email or Password");
+        throw new Error("Invalid username or Password");
     }
 });
 
@@ -161,5 +196,6 @@ const deleteMany = async (req, res) => {
 
 
 module.exports = {
-    create, findAll, deleteOne, updateOne, findOne, deleteMany, updateMany, registerUser, authUser, allUsers
+    create, findAll, deleteOne, updateOne, findOne, deleteMany, updateMany, registerUser, authUser, allUsers,
+    login
 }
