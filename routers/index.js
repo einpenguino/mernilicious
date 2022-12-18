@@ -9,6 +9,7 @@ const {deleteMany:DeletUsers, findAll:FindUsers} = require('../controllers/userC
 // Middleware
 app.use(express.json());
 
+app.use(express.static("public"))
 // Endpoints
 // Directory Endpoints
 // Ingredients
