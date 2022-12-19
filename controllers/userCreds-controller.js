@@ -15,23 +15,25 @@ const login = asyncHandler(async (req,res) => {
         // console.log(checkUser)
         
         if (checkUser){
-            const checkPassword = await bcrypt.compare(req.body.password, checkUser.password)
+            const checkPassword = await bcrypt.compare(password, checkUser.password)
             // console.log(checkPassword)
             if (checkPassword){
                 // When both username and password matches , create a token and assign to the log in user
                 const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
-                res.cookie('jwt',token, {httpOnly: true , maxAge:60000});
-                res.send(200).json(checkUser._id)
+                // Send Cookie, expires in 1 hr
+                res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
+                // res.json(checkUser._id)
+                res.sendStatus(200)
             }
             else{
-                res.sendStatus(httpStatus.DENIED)
+                res.sendStatus(400)
                 throw 'Password incorrect , try again'
                 // res.send('Password incorrect , try again')
             }
         }
 
         else{
-            res.sendStatus(httpStatus.DENIED)
+            res.sendStatus(400)
             throw 'Username incorrect or does not exist, please sign up'
             // res.send('Username incorrect or does not exist, please sign up')
         }

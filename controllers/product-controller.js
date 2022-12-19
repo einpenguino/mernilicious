@@ -81,7 +81,6 @@ const updateMany = async (req, res) => {
     try{
         const result = await Products.updateMany(req.query, {$set:req.body})
         res.json(result)
-        // console.log(req.query)
     }catch(e){
         console.error(e);
         res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
