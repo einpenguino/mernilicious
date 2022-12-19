@@ -4,7 +4,7 @@ const {checkExists} = require('../services/checkExists')
 const userRoutes = require('./userCreds-router')
 const app = express();
 const Products1 = require('../controllers/TrialCRUD')
-const {deleteMany:DeletUsers, findAll:FindUsers, login} = require('../controllers/userCreds-controller')
+const {deleteMany:DeletUsers, findAll:FindUsers, login, signUp} = require('../controllers/userCreds-controller')
 let cors = require("cors");
 const cookieParser = require('cookie-parser')
 
@@ -43,6 +43,7 @@ app.use('/user', userRoutes)
 app.get('/users', FindUsers)
 app.delete('/users', DeletUsers)
 app.post("/login", login);
+app.post('/signup', signUp)
 // User Profile
 require('./userProfile-router')(app)
 

@@ -8,35 +8,58 @@ const bcrypt = require("bcryptjs");
 
 const login = asyncHandler(async (req,res) => {  
     const {userName, password} = req.body
-    console.log(req.body)
+    console.log(userName)
     try{ 
         //Check if user exist in the DB thru the username
-        const checkUser = await model.findOne({"userName" : req.body.userName});
-        console.log(checkUser)
+        const checkUser = await model.findOne({"userName":userName});
+        // console.log(checkUser)
         
         if (checkUser){
             const checkPassword = await bcrypt.compare(req.body.password, checkUser.password)
+            // console.log(checkPassword)
             if (checkPassword){
                 // When both username and password matches , create a token and assign to the log in user
                 const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
                 res.cookie('jwt',token, {httpOnly: true , maxAge:60000});
-                res.json(checkUser._id)
+                res.send(200).json(checkUser._id)
             }
             else{
+                res.sendStatus(httpStatus.DENIED)
                 throw 'Password incorrect , try again'
+                // res.send('Password incorrect , try again')
             }
         }
 
         else{
+            res.sendStatus(httpStatus.DENIED)
             throw 'Username incorrect or does not exist, please sign up'
+            // res.send('Username incorrect or does not exist, please sign up')
         }
     }
     catch(error){
-        res.status(400).json(error); 
+        res.sendStatus(400).json(error); 
         console.log(error);     
     }  
     
 });
+
+const signUp = asyncHandler(async (req,res) => {
+    // const hash = await bcrypt.hash(req.body.password, 10)
+    const user = new UserCreds({
+        Name: req.body.name,
+        Username: req.body.username,
+        Password: req.body.password
+    });
+
+    try{
+    const savedUser = await user.save();
+    res.json(savedUser);
+    }
+    catch(error){
+        res.status(400).send(error.message); 
+        console.log(error.message);     
+    }  
+})
 
 const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search
@@ -197,5 +220,5 @@ const deleteMany = async (req, res) => {
 
 module.exports = {
     create, findAll, deleteOne, updateOne, findOne, deleteMany, updateMany, registerUser, authUser, allUsers,
-    login
+    login, signUp
 }
