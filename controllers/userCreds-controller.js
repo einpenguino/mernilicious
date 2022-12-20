@@ -21,22 +21,23 @@ const login = asyncHandler(async (req,res) => {
                 // When both username and password matches , create a token and assign to the log in user
                 const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
                 // Send Cookie, expires in 1 hr
-                res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
+                // res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
+                res.cookie('alabaster',token, {maxAge:10000});
                 // res.json(checkUser._id)
                 res.sendStatus(200)
             }
             else{
                 res.sendStatus(400)
-                throw 'Password incorrect , try again'
+                throw 'Username or Password is incorrect, please try again!'
                 // res.send('Password incorrect , try again')
             }
         }
 
-        else{
-            res.sendStatus(400)
-            throw 'Username incorrect or does not exist, please sign up'
-            // res.send('Username incorrect or does not exist, please sign up')
-        }
+        // else{
+        //     res.sendStatus(400)
+        //     throw 'Username incorrect or does not exist, please sign up'
+        //     // res.send('Username incorrect or does not exist, please sign up')
+        // }
     }
     catch(error){
         res.sendStatus(400).json(error); 

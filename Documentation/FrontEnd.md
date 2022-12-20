@@ -1,5 +1,7 @@
 - MUI
-- refs
-  - https://gist.github.com/vaish567/861e88d0e7f13cb00ef88767cd2f8d0f
-  - https://github.com/mui/material-ui/tree/v5.11.0/docs/data/material/getting-started/templates/sign-in-side
-  - https://github.com/mui/material-ui/tree/v5.11.0/docs/data/material/getting-started/templates
+- Case Studies
+  - [Chat App Case Study](https://github.com/piyush-eon/mern-chat-app)
+  - [Sign in / Up Case Study](https://gist.github.com/vaish567/861e88d0e7f13cb00ef88767cd2f8d0f)
+  - [Handy Templates from MUI](https://github.com/mui/material-ui/tree/v5.11.0/docs/data/material/getting-started/templates)
+  - [Protected Routes Case Study](https://blog.logrocket.com/complete-guide-authentication-with-react-router-v6/)
+  - [Protected Routes Case Study 2](https://ui.dev/react-router-protected-routes-authentication) : [CodeSandbox](https://codesandbox.io/s/react-router-v6-auth-demo-updated-t28l48)

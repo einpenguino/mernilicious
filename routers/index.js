@@ -8,15 +8,26 @@ const {deleteMany:DeletUsers, findAll:FindUsers, login, signUp} = require('../co
 let cors = require("cors");
 const cookieParser = require('cookie-parser')
 const productRoutes = require('./product-router')
+const {authenticate} = require('../controllers/auth-controller')
 
 const corsConfig = {
     credentials: true,
-    origin: true,
+    // origin: true,
+    // origin:false,
+    origin:[`${process.env.LOCALHOST}:4000/*`, `${process.env.LOCALHOST}:3000/*`]
+    // origin: function (origin, callback) {
+    //     if (whitelist.indexOf(origin) !== -1 || !origin) {
+    //       callback(null, true)
+    //     } else {
+    //       callback(new Error('Not allowed by CORS'))
+    //     }
+    //   }
 };
 
 // Middleware
 app.use(express.json());
-app.use(cors(corsConfig));
+// app.use(cors(corsConfig));
+app.use(cors(corsConfig))
 app.use(cookieParser())
 
 app.use(express.static("public"))
@@ -46,6 +57,7 @@ app.get('/users', FindUsers)
 app.delete('/users', DeletUsers)
 app.post("/login", login);
 app.post('/signup', signUp)
+app.get('/auth', authenticate)
 // User Profile
 require('./userProfile-router')(app)
 
