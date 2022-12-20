@@ -12,9 +12,10 @@ const {authenticate} = require('../controllers/auth-controller')
 
 const corsConfig = {
     credentials: true,
-    // origin: true,
+    origin: true,
     // origin:false,
-    origin:[`${process.env.LOCALHOST}:4000/*`, `${process.env.LOCALHOST}:3000/*`]
+    // origin:'*',
+    // origin:[`${process.env.LOCALHOST}:4000/*`, `${process.env.LOCALHOST}:3000/*`]
     // origin: function (origin, callback) {
     //     if (whitelist.indexOf(origin) !== -1 || !origin) {
     //       callback(null, true)
