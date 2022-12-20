@@ -10,7 +10,7 @@ const userCredentialsSchema = new Schema(
         password:{type:String, required:true},
         pic:{type:String,
         default:'https://cdn-icons-png.flaticon.com/512/149/149071.png'},
-        isAdmin:{type:Boolean, required:true, default:false}
+        isAdmin:{type:Boolean, default:false}
     },
     {timestamps:true}
 )

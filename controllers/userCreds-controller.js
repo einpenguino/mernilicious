@@ -47,10 +47,11 @@ const login = asyncHandler(async (req,res) => {
 
 const signUp = asyncHandler(async (req,res) => {
     // const hash = await bcrypt.hash(req.body.password, 10)
-    const user = new UserCreds({
-        Name: req.body.name,
-        Username: req.body.username,
-        Password: req.body.password
+    const user = new model({
+        name : req.body.name,
+        userName : req.body.username,
+        email : req.body.email,
+        password : req.body.password
     });
 
     try{

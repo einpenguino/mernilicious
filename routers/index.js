@@ -7,6 +7,7 @@ const Products1 = require('../controllers/TrialCRUD')
 const {deleteMany:DeletUsers, findAll:FindUsers, login, signUp} = require('../controllers/userCreds-controller')
 let cors = require("cors");
 const cookieParser = require('cookie-parser')
+const productRoutes = require('./product-router')
 
 const corsConfig = {
     credentials: true,
@@ -32,7 +33,8 @@ require('./directory-routers/dirProductType-router')(app)
 
 // Working Models
 // Products
-require('./product-router')(app)
+// require('./product-router')(app)
+app.use('/', productRoutes)
 // Skincare Regime
 require('./skincareRegime-router')(app)
 // Skin Goal Mapping
