@@ -26,9 +26,9 @@ const corsConfig = {
 };
 
 // Middleware
-app.use(express.json());
-// app.use(cors(corsConfig));
 app.use(cors(corsConfig))
+// app.use(cors())
+app.use(express.json());
 app.use(cookieParser())
 
 app.use(express.static("public"))
@@ -58,7 +58,7 @@ app.get('/users', FindUsers)
 app.delete('/users', DeletUsers)
 app.post("/login", login);
 app.post('/signup', signUp)
-app.get('/auth', authenticate)
+app.post('/auth', authenticate)
 // User Profile
 require('./userProfile-router')(app)
 

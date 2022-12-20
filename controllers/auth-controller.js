@@ -6,21 +6,34 @@ const httpStatus = require('http-status')
 
 const authenticate = async (req, res) => {
     // const id = req.id
-    if (req.headers.authorization && 
-        req.headers.authorization.startsWith("Bearer"))
-    {
-        const token = req.headers.authorization.split(" ")[1];
-        // console.log(token)
+    // console.log('authenticate called')
+    console.log(req.headers.cookie)
+    // if (req.headers.cookie && 
+    //     req.headers.cookie.startsWith("alabaster")){
+    if (req.headers.cookie){
+    try{
+
+        // console.log(req.headers.authorization)
+        const token = req.headers.cookie.split("=")[1];
+        console.log(token)
         //decodes token id
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // console.log(decoded.id)
+        console.log(decoded.id)
         // console.log(UserCreds)
         req.user = await model.findById(decoded._id).select("-password");
         console.log(req.user)
+        res.send(200)
+        
+    }catch(e){
+        console.log('token failed')
+        res.sendStatus(400)
+    }}else{
+        res.sendStatus(400)
     }
-    
-    // console.log(decoded)
-    // const response = await model.findOne({_id:req.id})
+        
+        // console.log(decoded)
+        // const response = await model.findOne({_id:req.id})
 }
+    
 
 module.exports = {authenticate}
