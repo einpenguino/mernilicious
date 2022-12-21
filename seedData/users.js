@@ -27,6 +27,11 @@ const seedUsers = [
         email:"penguin2@example.com",
         password:"iamapenguin"
     },
+    {
+        userName:"a",
+        email:"a",
+        password:"a"
+    },
 ]
 
 module.exports = seedUsers

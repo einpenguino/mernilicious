@@ -22,7 +22,7 @@ const authenticate = async (req, res) => {
         // console.log(UserCreds)
         req.user = await model.findById(decoded._id).select("-password");
         console.log(req.user)
-        res.send(200)
+        res.status(200).json({'isAdmin':req.user.isAdmin})
         
     }catch(e){
         console.log('token failed')

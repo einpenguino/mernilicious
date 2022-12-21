@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+require('./directory');
 const Schema = mongoose.Schema;
 
 
@@ -10,7 +11,11 @@ const userCredentialsSchema = new Schema(
         password:{type:String, required:true},
         pic:{type:String,
         default:'https://cdn-icons-png.flaticon.com/512/149/149071.png'},
-        isAdmin:{type:Boolean, default:false}
+        isAdmin:{type:Boolean, default:false},
+        skinType:{type:String},
+        skinSensitivity:{type:Boolean},
+        skinGoal:{type:String},
+        // regimeID:[{type: Schema.Types.ObjectId, ref:'SkincareRegime'}]
     },
     {timestamps:true}
 )

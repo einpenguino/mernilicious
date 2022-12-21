@@ -24,7 +24,16 @@ const login = asyncHandler(async (req,res) => {
                 // res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
                 res.cookie('alabaster',token, {maxAge:60000});
                 // res.json(checkUser._id)
-                res.sendStatus(200)
+                console.log(checkUser)
+                res.status(200).json({
+                    userName:checkUser.userName,
+                    email:checkUser.email,
+                    pic:checkUser.pic,
+                    isAdmin:checkUser.isAdmin,
+                    skinType:checkUser.skinType,
+                    skinSensitivity:checkUser.skinSensitivity,
+                    skinGoal:checkUser.skinGoal
+                })
             }
             else{
                 res.sendStatus(400)
@@ -97,13 +106,13 @@ const registerUser = asyncHandler(async (req, res) => {
   
     const user = await model.create({
         userName,
-      email,
-      password,
-      pic,
+        email,
+        password,
+        pic,
     });
   
     if (user) {
-      res.status(201).json({
+        res.status(201).json({
         _id: user._id,
         userName: user.userName,
         email: user.email,
@@ -115,7 +124,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Failed to create User!");
     }
-  });
+});
 
 const authUser = asyncHandler(async (req, res) => {
     const { userName, password } = req.body;
