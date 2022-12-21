@@ -13,15 +13,23 @@ const productSchema = new Schema(
         price:{
             type:Schema.Types.Decimal128, default:0.0
         },
-        
+        // skinType:{
+        //     type:[{ type: String}], required:true
+        // },
+        // productType:{
+        //     type:[{ type: String}], required:true
+        // },
+        // skinGoal:{
+        //     type:[{ type: String}]
+        // },
         skinType:{
-            type:[{ type: String}], required:true
+            type: String, required:true
         },
         productType:{
-            type:[{ type: String}], required:true
+            type: String, required:true
         },
         skinGoal:{
-            type:[{ type: String}]
+            type: String
         },
         description:{
             type:String

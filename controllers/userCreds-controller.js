@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 
 const login = asyncHandler(async (req,res) => {  
     const {userName, password} = req.body
-    console.log(userName)
+    // console.log(userName)
     try{ 
         //Check if user exist in the DB thru the username
         const checkUser = await model.findOne({"userName":userName});
@@ -36,20 +36,18 @@ const login = asyncHandler(async (req,res) => {
                 })
             }
             else{
-                res.sendStatus(400)
+                res.status(400)
                 throw 'Username or Password is incorrect, please try again!'
                 // res.send('Password incorrect , try again')
             }
+        }else{
+            res.status(400)
+            throw 'Username or Password is incorrect, please try again!'
+            // res.send('Username incorrect or does not exist, please sign up')
         }
-
-        // else{
-        //     res.sendStatus(400)
-        //     throw 'Username incorrect or does not exist, please sign up'
-        //     // res.send('Username incorrect or does not exist, please sign up')
-        // }
     }
     catch(error){
-        res.sendStatus(400).json(error); 
+        res.status(400).json(error); 
         console.log(error);     
     }  
     

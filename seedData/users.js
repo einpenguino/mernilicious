@@ -20,17 +20,44 @@ const seedUsers = [
     {
         userName:"penguin1",
         email:"penguin1@example.com",
-        password:"iamapenguin"
+        password:"iamapenguin",
+        skinType:"oily",
+        skinSensitivity:true,
+        skinGoal:'target hyper-pigmentation'
     },
     {
         userName:"penguin2",
         email:"penguin2@example.com",
-        password:"iamapenguin"
+        password:"iamapenguin",
+        skinType:"combination",
+        skinSensitivity:false,
+        skinGoal:'hydration'
+    },
+    {
+        userName:"penguin3",
+        email:"penguin3@example.com",
+        password:"iamapenguin",
+        skinType:"dry",
+        skinSensitivity:true,
+        skinGoal:'anti-aging'
+    },
+    {
+        userName:"penguin4",
+        email:"penguin4@example.com",
+        password:"iamapenguin",
     },
     {
         userName:"a",
         email:"a",
         password:"a"
+    },
+    {
+        userName:"b",
+        email:"b",
+        password:"b",
+        skinType:"dry",
+        skinSensitivity:true,
+        skinGoal:'anti-aging'
     },
 ]
 
