@@ -45,6 +45,7 @@ const seedUsers = [
         userName:"penguin4",
         email:"penguin4@example.com",
         password:"iamapenguin",
+        skinSensitivity:true,
     },
     {
         userName:"a",
@@ -58,6 +59,13 @@ const seedUsers = [
         skinType:"dry",
         skinSensitivity:true,
         skinGoal:'anti-aging'
+    },
+    {
+        userName:"c",
+        email:"c",
+        password:"c",
+        skinType:"dry",
+        skinSensitivity:true
     },
 ]
 

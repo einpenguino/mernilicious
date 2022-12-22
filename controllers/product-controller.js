@@ -5,7 +5,15 @@ const httpStatus = require('http-status')
 const findAll = async (req, res) => {
     try{        
         console.log(req.body);
-        const result = await Products.find(req.body);
+        const reqObj = {}
+        for (field in req.body){
+            if (req.body[field]){
+                console.log(field)
+                reqObj[field] = req.body[field]
+            }
+        }
+        console.log(reqObj)
+        const result = await Products.find(reqObj);
         res.json(result);
     }catch(e){
         console.error(e);
