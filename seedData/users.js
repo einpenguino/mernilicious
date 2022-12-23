@@ -50,7 +50,8 @@ const seedUsers = [
     {
         userName:"a",
         email:"a",
-        password:"a"
+        password:"a",
+        isAdmin:"true"
     },
     {
         userName:"b",

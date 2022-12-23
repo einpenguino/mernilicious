@@ -4,16 +4,44 @@ const httpStatus = require('http-status')
 
 const findAll = async (req, res) => {
     try{        
+        console.log('findAllProducts Triggered')
         console.log(req.body);
         const reqObj = {}
-        for (field in req.body){
+        for (let field in req.body){
+            // if field contains info
+            // console.log(`top: ${field}`)
             if (req.body[field]){
-                console.log(field)
-                reqObj[field] = req.body[field]
+                // console.log(Array.isArray((req.body[field])))
+                //  If field value is an array, restructure to lowercase
+                if (Array.isArray((req.body[field]))){
+                    reqObj[field]=[]
+                    for (let item of req.body[field]){
+                        try{
+                        // console.log(item.split(' ')[0].toLowerCase())
+                        reqObj[field].push(item.split(' ')[0].toLowerCase())
+                        // console.log(reqObj[field])
+                        }catch(e){
+                            console.log(e)
+                        }
+                        
+                    }
+                }else{
+                    reqObj[field] = req.body[field]
+                }
+                
             }
         }
+        // Gotcha, filter above will omit 'sensitive' field if it is sent as false
+        // if(!reqObj['sensitive']) reqObj['sensitive'] = false
         console.log(reqObj)
-        const result = await Products.find(reqObj);
+        // To restructure multiple fields into Obj
+        // let queryObj = {}
+        // for (let field in reqObj){
+        //     for (let entry in reqObj[field]){
+
+        //     }
+        // }
+        const result = await Products.find(reqObj).sort({name:1, productID:1}).exec();
         res.json(result);
     }catch(e){
         console.error(e);
@@ -33,44 +61,46 @@ const findOne = async (req, res) => {
 }
 
 const create = async (req, res) => {
+    console.log(req.body)
     try{
-        const resSkinType = req.body.skinType
-        for (ele of resSkinType){
-            const querySkinType = await DirSkinType.find({skinType:ele})
-            if (querySkinType.length < 1) {
-                res.send(`Error! "${ele}" does not exist! in SkinType Directory!`)
-            }
-        }
+        // const resSkinType = req.body.skinType
+        // for (ele of resSkinType){
+        //     const querySkinType = await DirSkinType.find({skinType:ele})
+        //     if (querySkinType.length < 1) {
+        //         res.send(`Error! "${ele}" does not exist! in SkinType Directory!`)
+        //     }
+        // }
 
-        const resProductType = req.body.productType
-        for (ele of resProductType){
-            const queryProductType = await DirProductType.find({productType:ele})
-            if (queryProductType.length < 1) {
-                res.send(`Error! "${ele}" does not exist! in ProductType Directory!`)
-            }
-        }
+        // const resProductType = req.body.productType
+        // for (ele of resProductType){
+        //     const queryProductType = await DirProductType.find({productType:ele})
+        //     if (queryProductType.length < 1) {
+        //         res.send(`Error! "${ele}" does not exist! in ProductType Directory!`)
+        //     }
+        // }
 
-        const resSkinGoal = req.body.skinGoal
-        for (ele of resSkinGoal){
-            const querySkinGoal = await DirSkinGoal.find({skinGoal:ele})
-            if (querySkinGoal.length < 1) {
-                res.send(`Error! "${ele}" does not exist! in SkinGoal Directory!`)
-            }
-        }
+        // // const resSkinGoal = req.body.skinGoal
+        // // for (ele of resSkinGoal){
+        // //     const querySkinGoal = await DirSkinGoal.find({skinGoal:ele})
+        // //     if (querySkinGoal.length < 1) {
+        // //         res.send(`Error! "${ele}" does not exist! in SkinGoal Directory!`)
+        // //     }
+        // // }
         
-        const resIngredients = req.body.ingredients
-        for (ele of resIngredients){
-            const queryIngredients = await DirIngredients.find({ingredients:ele})
-            if (queryIngredients.length < 1) {
-                res.send(`Error! "${ele}" does not exist! in Ingredients Directory!`)
-            }
-        }
+        // const resIngredients = req.body.ingredients
+        // for (ele of resIngredients){
+        //     const queryIngredients = await DirIngredients.find({ingredients:ele})
+        //     if (queryIngredients.length < 1) {
+        //         res.send(`Error! "${ele}" does not exist! in Ingredients Directory!`)
+        //     }
+        // }
         
         await Products.create(req.body)
-        res.send('completed successfully!')
+        // res.send('completed successfully!')
+        res.status(200).json('completed successfully!')
     }catch(e){
         console.log(e)
-        res.send(e)
+        res.status(400).json('creation failed!')
     }
 }
 

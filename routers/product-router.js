@@ -25,6 +25,7 @@ const router = express.Router();
 const endpointName = 'products'
 router.route("/products").get(auth, findAllProducts);
 router.route("/products").post(findAllProducts);
+router.route("/createproducts").post(createProducts)
 // router.route(`/${endpointName}`).get(protect, findAllProducts)
 
 

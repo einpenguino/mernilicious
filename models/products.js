@@ -4,11 +4,14 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
     {
+        // productID:{
+        //     type:String, required:true, unique:true
+        // },
         productID:{
-            type:String, required:true, unique:true
+            type:String
         },
         name:{
-            type:String, required:true
+            type:String, required:true, unique:true
         },
         price:{
             type:Schema.Types.Decimal128, default:0.0

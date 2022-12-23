@@ -22,7 +22,7 @@ const login = asyncHandler(async (req,res) => {
                 const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
                 // Send Cookie, expires in 1 hr
                 // res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
-                res.cookie('alabaster',token, {maxAge:60000});
+                res.cookie('alabaster',token, {maxAge:60000*60*24});
                 // res.json(checkUser._id)
                 console.log(checkUser)
                 res.status(200).json({
