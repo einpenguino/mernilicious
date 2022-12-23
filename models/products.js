@@ -43,7 +43,8 @@ const productSchema = new Schema(
         sensitive:{
             type:Boolean, required:true, default:false
         }
-    }
+    },
+    {timestamps:true}
 )
 
 module.exports = mongoose.model("Products", productSchema);

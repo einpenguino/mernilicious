@@ -49,17 +49,6 @@ const findAll = async (req, res) => {
     }
 }
 
-const findOne = async (req, res) => {
-    try{
-        const id = req.params.id;
-        const fetched = await Products.findOne({_id:id});
-        res.json(fetched);
-    }catch(e){
-        console.error(e);
-        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
-}
-
 const create = async (req, res) => {
     console.log(req.body)
     try{
@@ -105,13 +94,43 @@ const create = async (req, res) => {
 }
 
 const updateOne = async (req, res) => {
-    try{
-        const id = req.params.id;
-        const updated = await Products.updateOne({_id:id}, {$set:req.body});
-        res.json(updated);
-    }catch(e){
-        console.error(e);
-        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+    if(req.body.productID){
+        try{
+            console.log(req.body)
+            console.log(req.body.productID)
+            // const id = req.params.id;
+            const id = req.body.productID
+            const toUpdate = {...req.body}
+            delete toUpdate['productID']
+            delete toUpdate['name']
+            // console.log(toUpdate)
+            const updated = await Products.updateOne({_id:id}, {$set:toUpdate});
+            res.status(200).json(updated);
+            // res.status(200).json('completed')
+        }catch(e){
+            console.error(e);
+            res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+            // res.status(500).json(e);
+        }
+    }else{
+        res.status(400).json('Please select product to update!');
+    }
+    
+}
+
+const deleteOne = async (req, res) => {
+    if(req.body.productID){
+        try{
+            // const id = req.params.id;
+            const id = req.body.productID
+            const result = await Products.deleteOne({_id:id});
+            res.status(200).json(result);
+        }catch(e){
+            console.error(e);
+            res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }else{
+        res.status(400).json('Please select product to delete!');
     }
 }
 
@@ -125,16 +144,6 @@ const updateMany = async (req, res) => {
     }
 }
 
-const deleteOne = async (req, res) => {
-    try{
-        const id = req.params.id;
-        const result = await Products.deleteOne({_id:id});
-        res.json(result);
-    }catch(e){
-        console.error(e);
-        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
-}
 
 const deleteMany = async (req, res) => {
     try {
@@ -143,6 +152,17 @@ const deleteMany = async (req, res) => {
     }catch(e){
         console.error(e)
         res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
+    }
+}
+
+const findOne = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const fetched = await Products.findOne({_id:id});
+        res.json(fetched);
+    }catch(e){
+        console.error(e);
+        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
