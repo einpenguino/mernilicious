@@ -25,7 +25,7 @@ const router = express.Router();
 const endpointName = 'products'
 router.route("/products").get(findAllProducts);
 // router.route("/products").get(auth, findAllProducts);
-router.route("/products").post(findAllProducts);
+router.route("/products").post(auth, findAllProducts);
 router.route("/createproducts").post(createProducts)
 router.route("/updateproducts").put(updateOneProducts)
 router.route("/deleteproducts").delete(deleteOneProducts)

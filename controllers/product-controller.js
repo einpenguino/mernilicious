@@ -115,7 +115,6 @@ const updateOne = async (req, res) => {
     }else{
         res.status(400).json('Please select product to update!');
     }
-    
 }
 
 const deleteOne = async (req, res) => {
