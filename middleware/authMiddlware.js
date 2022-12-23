@@ -4,14 +4,16 @@ const asyncHandler = require("express-async-handler");
 require("dotenv").config();
 
 const auth = asyncHandler(async (req, res, next) => {
-  let token;
-
+  // console.log(req.cookies[Object.keys(req.cookies)])
   if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
+    req.cookies
+    // req.headers.authorization &&
+    // req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      token = req.headers.authorization.split(" ")[1];
+      // token = req.headers.authorization.split(" ")[1];
+      let token = req.cookies[Object.keys(req.cookies)]
+      console.log(token)
       // console.log(token)
       //decodes token id
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -26,13 +28,9 @@ const auth = asyncHandler(async (req, res, next) => {
       res.status(401);
       throw new Error("Not authorized, token failed");
     }
+  }else{
+    res.status(400).json("Not authorized, no token")
   }
-
-  if (!token) {
-    res.status(401);
-    throw new Error("Not authorized, no token");
-  }
-// next()
 });
 
 module.exports = { auth };

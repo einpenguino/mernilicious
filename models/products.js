@@ -4,24 +4,35 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
     {
+        // productID:{
+        //     type:String, required:true, unique:true
+        // },
         productID:{
-            type:String, required:true, unique:true
+            type:String
         },
         name:{
-            type:String, required:true
+            type:String, required:true, unique:true
         },
         price:{
             type:Schema.Types.Decimal128, default:0.0
         },
-        
+        // skinType:{
+        //     type:[{ type: String}], required:true
+        // },
+        // productType:{
+        //     type:[{ type: String}], required:true
+        // },
+        // skinGoal:{
+        //     type:[{ type: String}]
+        // },
         skinType:{
-            type:[{ type: String}], required:true
+            type: String, required:true
         },
         productType:{
-            type:[{ type: String}], required:true
+            type: String, required:true
         },
         skinGoal:{
-            type:[{ type: String}]
+            type: String
         },
         description:{
             type:String
@@ -32,7 +43,8 @@ const productSchema = new Schema(
         sensitive:{
             type:Boolean, required:true, default:false
         }
-    }
+    },
+    {timestamps:true}
 )
 
 module.exports = mongoose.model("Products", productSchema);

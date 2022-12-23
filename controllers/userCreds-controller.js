@@ -8,27 +8,42 @@ const bcrypt = require("bcryptjs");
 
 const login = asyncHandler(async (req,res) => {  
     const {userName, password} = req.body
-    console.log(req.body)
+    // console.log(userName)
     try{ 
         //Check if user exist in the DB thru the username
-        const checkUser = await model.findOne({"userName" : req.body.userName});
-        console.log(checkUser)
+        const checkUser = await model.findOne({"userName":userName});
+        // console.log(checkUser)
         
         if (checkUser){
-            const checkPassword = await bcrypt.compare(req.body.password, checkUser.password)
+            const checkPassword = await bcrypt.compare(password, checkUser.password)
+            // console.log(checkPassword)
             if (checkPassword){
                 // When both username and password matches , create a token and assign to the log in user
                 const token = jwt.sign({_id: checkUser._id}, process.env.JWT_SECRET);
-                res.cookie('jwt',token, {httpOnly: true , maxAge:60000});
-                res.json(checkUser._id)
+                // Send Cookie, expires in 1 hr
+                // res.cookie('alabaster',token, {httpOnly: true , maxAge:10000});
+                res.cookie('alabaster',token, {maxAge:60000*60*24});
+                // res.json(checkUser._id)
+                console.log(checkUser)
+                res.status(200).json({
+                    userName:checkUser.userName,
+                    email:checkUser.email,
+                    pic:checkUser.pic,
+                    isAdmin:checkUser.isAdmin,
+                    skinType:checkUser.skinType,
+                    skinSensitivity:checkUser.skinSensitivity,
+                    skinGoal:checkUser.skinGoal
+                })
             }
             else{
-                throw 'Password incorrect , try again'
+                res.status(400)
+                throw 'Username or Password is incorrect, please try again!'
+                // res.send('Password incorrect , try again')
             }
-        }
-
-        else{
-            throw 'Username incorrect or does not exist, please sign up'
+        }else{
+            res.status(400)
+            throw 'Username or Password is incorrect, please try again!'
+            // res.send('Username incorrect or does not exist, please sign up')
         }
     }
     catch(error){
@@ -37,6 +52,25 @@ const login = asyncHandler(async (req,res) => {
     }  
     
 });
+
+const signUp = asyncHandler(async (req,res) => {
+    // const hash = await bcrypt.hash(req.body.password, 10)
+    const user = new model({
+        name : req.body.name,
+        userName : req.body.username,
+        email : req.body.email,
+        password : req.body.password
+    });
+
+    try{
+    const savedUser = await user.save();
+    res.json(savedUser);
+    }
+    catch(error){
+        res.status(400).send(error.message); 
+        console.log(error.message);     
+    }  
+})
 
 const allUsers = asyncHandler(async (req, res) => {
     const keyword = req.query.search
@@ -70,13 +104,13 @@ const registerUser = asyncHandler(async (req, res) => {
   
     const user = await model.create({
         userName,
-      email,
-      password,
-      pic,
+        email,
+        password,
+        pic,
     });
   
     if (user) {
-      res.status(201).json({
+        res.status(201).json({
         _id: user._id,
         userName: user.userName,
         email: user.email,
@@ -88,7 +122,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Failed to create User!");
     }
-  });
+});
 
 const authUser = asyncHandler(async (req, res) => {
     const { userName, password } = req.body;
@@ -197,5 +231,5 @@ const deleteMany = async (req, res) => {
 
 module.exports = {
     create, findAll, deleteOne, updateOne, findOne, deleteMany, updateMany, registerUser, authUser, allUsers,
-    login
+    login, signUp
 }
