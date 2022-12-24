@@ -60,7 +60,7 @@
 - [x] Brainstorm + Draft UI
 - [x] Model Design
 - [x] Setup Mongoose Models
-- [ ] Use Vercel for React Frontend
+- [x] Use Vercel for React Frontend
 #### Wishlist of technical stuff to implement
 1. Test Driven Development
 2. Implement using TypeScript

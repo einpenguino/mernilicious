@@ -26,9 +26,9 @@ const endpointName = 'products'
 router.route("/products").get(findAllProducts);
 // router.route("/products").get(auth, findAllProducts);
 router.route("/products").post(findAllProducts);
-router.route("/createproducts").post(createProducts)
-router.route("/updateproducts").put(updateOneProducts)
-router.route("/deleteproducts").delete(deleteOneProducts)
+router.route("/createproducts").post(auth, createProducts)
+router.route("/updateproducts").put(auth, updateOneProducts)
+router.route("/deleteproducts").delete(auth, deleteOneProducts)
 // router.route(`/${endpointName}`).get(protect, findAllProducts)
 
 
